@@ -17,7 +17,7 @@ class OnboardingView extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(
           width: 0.0,
-          color: background,
+          color: Colors.white,
         ),
       ),
       child: SingleChildScrollView(

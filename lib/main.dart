@@ -1,8 +1,12 @@
+import 'package:alumni_hub/views/onboarding.dart';
 import 'package:alumni_hub/views/splash.screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {
@@ -10,11 +14,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alumni Hub',
-      theme: ThemeData(
-        primarySwatch: Colors.primaries[3],
-      ),
-      home: const SplashScreen(),
-    );
+        title: 'Alumni Hub',
+        theme: ThemeData(
+          primarySwatch: Colors.primaries[3],
+        ),
+        home: const SplashScreen());
   }
 }

@@ -1,8 +1,10 @@
-import 'package:alumni_hub/const.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
 
-import '../widgets/route.animation.dart';
-import 'onboarding.dart';
+import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/onboarding.dart';
+import 'package:alumni_hub/widgets/onboarding.view.dart';
+import 'package:alumni_hub/widgets/route.animation.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,13 +14,22 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late Timer time;
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.of(context).pushAndRemoveUntil(
-          animateRoute(const OnBoarding()), (route) => false);
+    time = Timer(const Duration(seconds: 2), () {
+      Navigator.pushAndRemoveUntil(
+          context,
+          RouteAnimate(builder: (context) => const OnBoardingScreen()),
+          (route) => false);
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    time.cancel();
+    super.dispose();
   }
 
   @override

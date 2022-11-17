@@ -1,19 +1,12 @@
 import 'package:flutter/material.dart';
 
-Route animateRoute(Widget className) {
-  return PageRouteBuilder(
-    pageBuilder: (context, animation, secondaryAnimation) => className,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(0.0, 1.0);
-      const end = Offset.zero;
-      const curve = Curves.ease;
+class RouteAnimate<T> extends MaterialPageRoute<T> {
+  RouteAnimate({required WidgetBuilder builder, RouteSettings? settings})
+      : super(builder: builder, settings: settings);
 
-      var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-      return SlideTransition(
-        position: animation.drive(tween),
-        child: child,
-      );
-    },
-  );
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation, Widget child) {
+    return FadeTransition(opacity: animation, child: child);
+  }
 }

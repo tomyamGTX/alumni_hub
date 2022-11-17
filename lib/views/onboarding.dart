@@ -4,14 +4,14 @@ import 'package:onboarding/onboarding.dart';
 
 import '../widgets/onboarding.view.dart';
 
-class OnBoarding extends StatefulWidget {
-  const OnBoarding({super.key});
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({super.key});
 
   @override
-  State<OnBoarding> createState() => _OnBoardingState();
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _OnBoardingState extends State<OnBoarding> {
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int index = 0;
 
   @override
