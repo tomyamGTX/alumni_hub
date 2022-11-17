@@ -1,7 +1,7 @@
 import 'package:alumni_hub/const.dart';
-import 'package:drawing_animation/drawing_animation.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/route.animation.dart';
 import 'onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,10 +15,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => const OnBoarding()),
-          (route) => false);
+      Navigator.of(context).pushAndRemoveUntil(
+          animateRoute(const OnBoarding()), (route) => false);
     });
     super.initState();
   }

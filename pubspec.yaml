@@ -31,7 +31,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  drawing_animation: ^1.0.1
+  onboarding: ^3.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
