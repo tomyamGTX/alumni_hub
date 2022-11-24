@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:alumni_hub/const.dart';
 import 'package:alumni_hub/views/onboarding.dart';
-import 'package:alumni_hub/widgets/onboarding.view.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +33,26 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Image.asset(uitmLogo)));
+    return Scaffold(
+        body: Center(
+            child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Spacer(),
+        Image.asset(
+          uitmLogo,
+          width: 120,
+          height: 120,
+        ),
+        Spacer(),
+        Padding(
+          padding: const EdgeInsets.all(56.0),
+          child: Text(
+            appName,
+            style: titleStyle,
+          ),
+        )
+      ],
+    )));
   }
 }

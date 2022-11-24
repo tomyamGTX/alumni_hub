@@ -1,6 +1,5 @@
 import 'package:alumni_hub/const.dart';
 import 'package:flutter/material.dart';
-import 'package:onboarding/onboarding.dart';
 
 class OnboardingView extends StatelessWidget {
   final String path;
@@ -27,33 +26,25 @@ class OnboardingView extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 45.0,
-                vertical: 90.0,
-              ),
+              padding: const EdgeInsets.only(
+                  left: 45.0, right: 45, top: 70.0, bottom: 0),
               child: Image.asset(path),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 45.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  title,
-                  style: titleStyle,
-                  textAlign: TextAlign.left,
-                ),
+              child: Text(
+                title,
+                style: titleStyle,
+                textAlign: TextAlign.center,
               ),
             ),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 45.0, vertical: 10.0),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  desc,
-                  style: infoStyle,
-                  textAlign: TextAlign.left,
-                ),
+              child: Text(
+                desc,
+                style: infoStyle,
+                textAlign: TextAlign.center,
               ),
             ),
           ],

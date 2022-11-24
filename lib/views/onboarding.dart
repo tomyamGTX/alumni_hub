@@ -1,4 +1,7 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/login.screen.dart';
+import 'package:alumni_hub/widgets/route.animation.dart';
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:onboarding/onboarding.dart';
 
@@ -13,117 +16,86 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int index = 0;
-
+  final List<PageModel> onboardingPagesList = [
+    PageModel(
+      widget: OnboardingView(
+          path: uitmLogo,
+          title: 'Welcome to Alumni Hub',
+          desc: 'An app to notify you about UITM\'s alumni events'),
+    ),
+    PageModel(
+      widget: OnboardingView(
+          path: uitmLogo,
+          title: 'Add Your Own Events',
+          desc:
+              'You also can add event that you want to organize to other users'),
+    ),
+    PageModel(
+      widget: OnboardingView(
+          path: uitmLogo,
+          title: 'Discover New Interest',
+          desc: 'Get the latest alumni events here'),
+    ),
+  ];
   @override
   Widget build(BuildContext context) {
-    final onboardingPagesList = [
-      PageModel(
-        widget: OnboardingView(
-            path: uitmLogo,
-            title: 'Hello World',
-            desc: 'This is view at index 1'),
-      ),
-      PageModel(
-        widget: OnboardingView(
-            path: uitmLogo,
-            title: 'Hello World 2',
-            desc: 'And this is for view 2'),
-      ),
-      PageModel(
-        widget: OnboardingView(
-            path: uitmLogo,
-            title: 'Hello World 3',
-            desc: 'And this one the last view'),
-      ),
-    ];
-
     return Scaffold(
-      body: Onboarding(
-        pages: onboardingPagesList,
-        onPageChange: (int pageIndex) {
-          index = pageIndex;
-        },
-        startPageIndex: 0,
-        footerBuilder: (context, dragDistance, pagesLength, setIndex) {
-          return DecoratedBox(
-            decoration: BoxDecoration(
-              color: background,
-              border: Border.all(
-                width: 0.0,
-                color: Colors.white,
-              ),
-            ),
-            child: ColoredBox(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(45.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomIndicator(
-                      netDragPercent: dragDistance,
-                      pagesLength: pagesLength,
-                      indicator: Indicator(
-                        activeIndicator: ActiveIndicator(
-                            color: Colors.black, borderWidth: 0.7),
-                        closedIndicator: ClosedIndicator(
-                            color: Theme.of(context).primaryColor,
-                            borderWidth: 0.7),
-                        indicatorDesign: IndicatorDesign.polygon(
-                            polygonDesign: PolygonDesign(
-                                polygon: DesignType.polygon_circle)),
-                      ),
-                    ),
-                    index == pagesLength - 1
-                        ? _signupButton
-                        : _skipButton(setIndex: setIndex)
-                  ],
+      body: Center(
+        child: Onboarding(
+          pages: onboardingPagesList,
+          onPageChange: (int pageIndex) {
+            index = pageIndex;
+          },
+          startPageIndex: index,
+          footerBuilder: (context, dragDistance, pagesLength, setIndex) {
+            return Column(
+              children: [
+                index == pagesLength - 1 ? _getStartedButton : Container(),
+                const SizedBox(
+                  height: 140,
                 ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Material _skipButton({void Function(int)? setIndex}) {
-    return Material(
-      borderRadius: defaultSkipButtonBorderRadius,
-      color: Theme.of(context).primaryColor,
-      child: InkWell(
-        borderRadius: defaultSkipButtonBorderRadius,
-        onTap: () {
-          if (setIndex != null) {
-            index = 2;
-            setIndex(2);
-          }
-        },
-        child: const Padding(
-          padding: defaultSkipButtonPadding,
-          child: Text(
-            'Skip',
-            style: defaultSkipButtonTextStyle,
-          ),
+                Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: DotsIndicator(
+                    dotsCount: pagesLength,
+                    position: index.toDouble(),
+                    onTap: (position) => {
+                      setState(() {
+                        index = position.toInt();
+                      })
+                    },
+                    decorator: DotsDecorator(
+                      activeColor: kPrimaryColor,
+                      size: const Size.square(9.0),
+                      activeSize: const Size(18.0, 9.0),
+                      activeShape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0)),
+                    ),
+                  ),
+                )
+              ],
+            );
+          },
         ),
       ),
     );
   }
 
-  Material get _signupButton {
-    return Material(
-      borderRadius: defaultProceedButtonBorderRadius,
-      color: Theme.of(context).primaryColor,
-      child: InkWell(
-        borderRadius: defaultProceedButtonBorderRadius,
-        onTap: () {},
-        child: const Padding(
-          padding: defaultProceedButtonPadding,
-          child: Text(
-            'Sign up',
-            style: defaultProceedButtonTextStyle,
-          ),
-        ),
+  Widget get _getStartedButton {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          fixedSize: const Size(176, 36),
+          elevation: 1,
+          side: const BorderSide(color: Colors.grey),
+          backgroundColor: Colors.white),
+      onPressed: () => Navigator.pushAndRemoveUntil(
+          context,
+          RouteAnimate(builder: (context) => const LoginScreen()),
+          (route) => false),
+      child: Text(
+        'GET STARTED',
+        style:
+            TextStyle(color: kPrimaryColor, letterSpacing: 1.0, fontSize: 18),
       ),
     );
   }

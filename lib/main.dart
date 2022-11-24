@@ -1,4 +1,3 @@
-import 'package:alumni_hub/views/onboarding.dart';
 import 'package:alumni_hub/views/splash.screen.dart';
 
 import 'package:flutter/material.dart';
