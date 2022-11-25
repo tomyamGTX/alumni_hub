@@ -1,4 +1,6 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/register.screen.dart';
+import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -124,7 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text('No account yet?'),
-            TextButton(onPressed: () {}, child: const Text('Register Here'))
+            TextButton(
+                onPressed: () => Navigator.push(context,
+                    RouteAnimate(builder: (context) => const Register())),
+                child: const Text('Register Here'))
           ],
         ),
       ),
