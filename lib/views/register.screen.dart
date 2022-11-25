@@ -1,4 +1,6 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/home.screen.dart';
+import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -89,7 +91,11 @@ class _RegisterState extends State<Register> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
                           fixedSize: const Size(328, 48)),
-                      onPressed: () {},
+                      onPressed: () => Navigator.pushAndRemoveUntil(
+                          context,
+                          RouteAnimate(
+                              builder: (context) => const HomeScreen()),
+                          (route) => false),
                       child: const Text('REGISTER')),
                 ),
               ],

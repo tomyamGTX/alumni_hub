@@ -1,4 +1,5 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/home.screen.dart';
 import 'package:alumni_hub/views/register.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: kPrimaryColor,
                       fixedSize: const Size(312, 48)),
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushAndRemoveUntil(
+                      context,
+                      RouteAnimate(builder: (context) => const HomeScreen()),
+                      (route) => false),
                   child: const Text('LOGIN')),
             ],
           ),

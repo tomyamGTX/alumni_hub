@@ -30,7 +30,7 @@ var headerTitleStyle = GoogleFonts.roboto(
 var titleStyle = GoogleFonts.roboto(
   fontSize: 24.0,
   wordSpacing: 1,
-  letterSpacing: 1.2,
+  letterSpacing: 1,
   fontWeight: FontWeight.w400,
   color: Colors.black,
 );
