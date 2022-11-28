@@ -10,7 +10,7 @@ class TopEventTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 186,
       child: Stack(
         alignment: Alignment.bottomCenter,

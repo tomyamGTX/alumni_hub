@@ -84,8 +84,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget get _getStartedButton {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          fixedSize: const Size(176, 36),
-          elevation: 1,
+          fixedSize: const Size(131, 36),
+          elevation: 0,
           side: const BorderSide(color: Colors.grey),
           backgroundColor: Colors.white),
       onPressed: () => Navigator.pushAndRemoveUntil(
@@ -94,8 +94,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           (route) => false),
       child: Text(
         'GET STARTED',
-        style:
-            TextStyle(color: kPrimaryColor, letterSpacing: 1.0, fontSize: 18),
+        style: TextStyle(color: kPrimaryColor, fontSize: 14),
       ),
     );
   }

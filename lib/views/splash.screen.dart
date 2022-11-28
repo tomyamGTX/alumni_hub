@@ -38,13 +38,13 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Spacer(),
+        const Spacer(),
         Image.asset(
           uitmLogo,
           width: 120,
           height: 120,
         ),
-        Spacer(),
+        const Spacer(),
         Padding(
           padding: const EdgeInsets.all(56.0),
           child: Text(

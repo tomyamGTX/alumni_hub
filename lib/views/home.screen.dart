@@ -1,4 +1,5 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/chatbot.screen.dart';
 import 'package:alumni_hub/views/favourite.screen.dart';
 import 'package:alumni_hub/views/search.screen.dart';
 import 'package:alumni_hub/views/setting.screen.dart';
@@ -65,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  Container buildEvents() => Container(
+  Widget buildEvents() => SizedBox(
         height: MediaQuery.of(context).size.height * 0.26,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -93,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ]),
       );
 
-  Container buildTopEvents() => Container(
+  Widget buildTopEvents() => SizedBox(
         height: MediaQuery.of(context).size.height * 0.3,
         child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           Align(
@@ -126,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
               minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 54),
               shape: StadiumBorder(
                   side: BorderSide(color: kPrimaryColor, width: 2))),
-          onPressed: () {},
+          onPressed: () => Navigator.push(
+              context, RouteAnimate(builder: (context) => ChatBotScreen())),
           child: Text(
             'CHAT WITH ALUMNI BOT',
             style: GoogleFonts.roboto(
