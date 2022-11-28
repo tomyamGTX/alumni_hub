@@ -16,7 +16,7 @@ class ChatBotScreen extends StatefulWidget {
 class _ChatBotScreenState extends State<ChatBotScreen> {
   int _length = 1;
 
-  var _scroll = ScrollController();
+  final _scroll = ScrollController();
 
   @override
   Widget build(BuildContext context) {

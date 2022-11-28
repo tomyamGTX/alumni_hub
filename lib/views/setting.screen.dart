@@ -32,13 +32,13 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
 
-  Container buildReminder() => Container(
+  Widget buildReminder() => SizedBox(
         height: 160,
         width: MediaQuery.of(context).size.width,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -63,7 +63,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ],
         ),
       );
-  Container buildMySetting() => Container(
+  Widget buildMySetting() => SizedBox(
         height: 180,
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -97,7 +97,7 @@ class _SettingScreenState extends State<SettingScreen> {
   ElevatedButton logOutButton() {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: kPrimaryColor, minimumSize: Size(312, 48)),
+            backgroundColor: kPrimaryColor, minimumSize: const Size(312, 48)),
         onPressed: () {},
         child: Text('LOGOUT',
             style: GoogleFonts.roboto(

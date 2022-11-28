@@ -128,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
               shape: StadiumBorder(
                   side: BorderSide(color: kPrimaryColor, width: 2))),
           onPressed: () => Navigator.push(
-              context, RouteAnimate(builder: (context) => ChatBotScreen())),
+              context, RouteAnimate(builder: (context) => const ChatBotScreen())),
           child: Text(
             'CHAT WITH ALUMNI BOT',
             style: GoogleFonts.roboto(
