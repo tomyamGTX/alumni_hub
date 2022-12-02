@@ -74,7 +74,7 @@ class _VideoScreenState extends State<VideoScreen> {
                   style: GoogleFonts.roboto(fontSize: 40),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
             ],
           ),
         );
