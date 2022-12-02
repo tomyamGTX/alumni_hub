@@ -1,3 +1,5 @@
+import 'package:alumni_hub/views/video.dart';
+import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,14 +17,18 @@ class TopEventTile extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Container(
-            margin: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                image: const DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(
-                        'https://www.specialevents.com/sites/specialevents.com/files/styles/article_featured_retina/public/gallery_promo_image/InVision_Shaklee_Global_Live.jpg?itok=huOoiSZJ'))),
+          InkWell(
+            onTap: () => Navigator.push(context,
+                RouteAnimate(builder: (context) => const VideoScreen())),
+            child: Container(
+              margin: const EdgeInsets.all(4),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  image: const DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                          'https://www.specialevents.com/sites/specialevents.com/files/styles/article_featured_retina/public/gallery_promo_image/InVision_Shaklee_Global_Live.jpg?itok=huOoiSZJ'))),
+            ),
           ),
           Card(
             color: Colors.transparent,

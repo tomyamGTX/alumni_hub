@@ -48,7 +48,7 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
           ),
         ),
         bottomNavigationBar: SizedBox(
-          height: 60,
+          height: 100,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: [
@@ -60,10 +60,12 @@ class _ChatBotScreenState extends State<ChatBotScreen> {
                       setState(() {
                         _length++;
                       });
-                      _scroll.animateTo(
-                          _length * MediaQuery.of(context).size.height * 0.3,
-                          duration: const Duration(milliseconds: 100),
-                          curve: Curves.ease);
+                      if (_length > 3) {
+                        _scroll.animateTo(
+                            _length * MediaQuery.of(context).size.height * 0.2,
+                            duration: const Duration(milliseconds: 100),
+                            curve: Curves.ease);
+                      }
                     },
                     backgroundColor: kPrimaryColor,
                     label: Text(

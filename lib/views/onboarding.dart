@@ -82,12 +82,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   }
 
   Widget get _getStartedButton {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-          fixedSize: const Size(131, 36),
-          elevation: 0,
-          side: const BorderSide(color: Colors.grey),
-          backgroundColor: Colors.white),
+    return OutlinedButton(
       onPressed: () => Navigator.pushAndRemoveUntil(
           context,
           RouteAnimate(builder: (context) => const LoginScreen()),
