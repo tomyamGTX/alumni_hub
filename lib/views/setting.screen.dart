@@ -1,6 +1,11 @@
+import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/login.screen.dart';
+import 'package:alumni_hub/widgets/route.animation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -11,6 +16,8 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   var _value = false;
+
+  var loading = true;
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +105,19 @@ class _SettingScreenState extends State<SettingScreen> {
     return ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: kPrimaryColor, minimumSize: const Size(312, 48)),
-        onPressed: () {},
+        onPressed: () async {
+          try {
+            await Provider.of<Authentication>(context, listen: false).logOut();
+            if (!mounted) return;
+            Navigator.pushAndRemoveUntil(
+                context,
+                RouteAnimate(builder: (context) => const LoginScreen()),
+                (route) => false);
+          } on FirebaseAuthException catch (e) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(e.message!)));
+          }
+        },
         child: Text('LOGOUT',
             style: GoogleFonts.roboto(
                 fontSize: 14, fontWeight: FontWeight.w500, letterSpacing: 1)));

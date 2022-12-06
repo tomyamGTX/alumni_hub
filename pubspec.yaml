@@ -38,8 +38,12 @@ dependencies:
   intl:
   youtube_player_iframe: ^3.1.0
 
+  #state_management
+  provider: ^6.0.4
+  
   #firebase
   firebase_core: ^2.3.0
+  firebase_auth: ^4.1.5
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

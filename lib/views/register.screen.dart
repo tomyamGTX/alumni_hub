@@ -1,8 +1,9 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/views/home.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -13,7 +14,9 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
-
+  String? name;
+  String? email;
+  String? password;
   bool _hide = true;
 
   @override
@@ -58,11 +61,24 @@ class _RegisterState extends State<Register> {
             child: ListView(
               children: [
                 TextFormField(
-                  decoration: const InputDecoration(
-                      suffixIcon: Icon(Icons.person),
-                      labelText: 'Name',
-                      border: OutlineInputBorder()),
-                ),
+                    decoration: const InputDecoration(
+                        suffixIcon: Icon(Icons.person),
+                        labelText: 'Name',
+                        border: OutlineInputBorder()),
+                    onChanged: (value) => setState(() {
+                          name = value;
+                        }),
+                    validator: (value) {
+                      RegExp exp = RegExp(r"^[a-zA-Z ]*$",
+                          caseSensitive: false, unicode: true, dotAll: true);
+                      if (exp.hasMatch(value!)) {
+                        return null;
+                      } else if (value.isEmpty) {
+                        return 'Please insert name!';
+                      } else {
+                        return 'Only text are allowed';
+                      }
+                    }),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: TextFormField(
@@ -70,6 +86,21 @@ class _RegisterState extends State<Register> {
                         suffixIcon: Icon(Icons.mail),
                         labelText: 'Email',
                         border: OutlineInputBorder()),
+                    onChanged: (value) => setState(() {
+                      email = value;
+                    }),
+                    validator: (v) {
+                      RegExp exp = RegExp(
+                          r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
+                      if (exp.hasMatch(v!)) {
+                        return null;
+                      } else if (v.isEmpty) {
+                        return 'Please Insert email';
+                      } else {
+                        return 'Please Insert valid email';
+                      }
+                    },
                   ),
                 ),
                 TextFormField(
@@ -83,6 +114,26 @@ class _RegisterState extends State<Register> {
                               _hide ? Icons.visibility_off : Icons.visibility)),
                       labelText: 'Password',
                       border: const OutlineInputBorder()),
+                  onChanged: (value) => setState(() {
+                    password = value;
+                  }),
+                  validator: (value) {
+                    ///check contain digit r"(?=.*\d)
+                    ///check length at least 6 input [a-zA-Z0-9]{6}
+                    ///check contain symbol (?=.*\W)
+                    ///check contain upper case (?=.*[A-Z])
+                    RegExp exp =
+                        RegExp(r"(?=.*\d)(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9]{6}");
+                    if (exp.hasMatch(value!)) {
+                      return null;
+                    } else if (value.isEmpty) {
+                      return 'Please Insert password';
+                    } else if (value.length < 6) {
+                      return 'Please insert password more than 6 characters';
+                    } else {
+                      return 'Must contain combination of upper case, number and symbol';
+                    }
+                  },
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
@@ -90,11 +141,25 @@ class _RegisterState extends State<Register> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: kPrimaryColor,
                           fixedSize: const Size(328, 48)),
-                      onPressed: () => Navigator.pushAndRemoveUntil(
-                          context,
-                          RouteAnimate(
-                              builder: (context) => const HomeScreen()),
-                          (route) => false),
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          await Provider.of<Authentication>(context,
+                                  listen: false)
+                              .register(email!, password!);
+                          if (!mounted) return;
+                          await Provider.of<Authentication>(context,
+                                  listen: false)
+                              .setName(name!);
+                          if (!mounted) return;
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              RouteAnimate(
+                                  builder: (context) => const HomeScreen()),
+                              (route) => false);
+
+                          //try catch here
+                        }
+                      },
                       child: const Text('REGISTER')),
                 ),
               ],

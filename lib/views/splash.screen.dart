@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/views/landing.screen.dart';
 import 'package:alumni_hub/views/onboarding.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import 'home.screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     time = Timer(const Duration(seconds: 2), () {
       Navigator.pushAndRemoveUntil(
           context,
-          RouteAnimate(builder: (context) => const OnBoardingScreen()),
+          RouteAnimate(builder: (context) => const LandingScreen()),
           (route) => false);
     });
     super.initState();
