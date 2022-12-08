@@ -11,7 +11,7 @@ class UserModel {
       required this.userPicUrl});
 
   ///get data from db and convert to object
-  UserModel.fromJson(map) {
+  UserModel.fromJson(Map<String, dynamic> map) {
     userId = map['userId'];
     userName = map['userName'];
     userEmail = map['userEmail'];
@@ -23,6 +23,6 @@ class UserModel {
         "userId": userId,
         "userName": userName,
         "userEmail": userEmail,
-        "userPicurl": userPicUrl
+        "userPicUrl": userPicUrl
       };
 }

@@ -1,3 +1,5 @@
+import 'package:alumni_hub/models/user.model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,12 @@ class Authentication extends ChangeNotifier {
   getUser() {
     //fetch from db
   }
-  update() {}
+  Future<void> update(UserModel userModel) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModel.userId)
+        .set(userModel.toJson());
+  }
+
   delete() {}
 }

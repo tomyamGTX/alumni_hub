@@ -1,5 +1,6 @@
 import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/firebase_options.dart';
+import 'package:alumni_hub/providers/events.provider.dart';
 import 'package:alumni_hub/views/splash.screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: Authentication()),
         ChangeNotifierProvider<Authentication>(
-            create: (context) => Authentication())
+            create: (context) => Authentication()),
+        ChangeNotifierProvider<EventData>(create: (context) => EventData())
       ],
       child: MaterialApp(
           title: 'Alumni Hub',

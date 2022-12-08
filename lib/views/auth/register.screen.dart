@@ -1,4 +1,5 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/models/user.model.dart';
 import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/views/home.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
@@ -153,6 +154,20 @@ class _RegisterState extends State<Register> {
                                     listen: false)
                                 .setName(name!);
                             if (!mounted) return;
+
+                            var user = FirebaseAuth.instance.currentUser;
+
+                            if (user != null) {
+                              UserModel userModel = UserModel(
+                                  userEmail: user.email,
+                                  userId: user.uid,
+                                  userName: user.displayName ?? name,
+                                  userPicUrl: user.photoURL ?? userIcon);
+                              await Provider.of<Authentication>(context,
+                                      listen: false)
+                                  .update(userModel);
+                            }
+                            if (!mounted) return;
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 RouteAnimate(
@@ -161,6 +176,9 @@ class _RegisterState extends State<Register> {
                           } on FirebaseAuthException catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text(e.message!)));
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(e.toString())));
                           }
 
                           //try catch here

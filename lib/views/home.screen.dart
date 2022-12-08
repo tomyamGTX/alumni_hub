@@ -1,4 +1,5 @@
 import 'package:alumni_hub/const.dart';
+import 'package:alumni_hub/providers/events.provider.dart';
 import 'package:alumni_hub/views/chatbot.screen.dart';
 import 'package:alumni_hub/views/favourite.screen.dart';
 import 'package:alumni_hub/views/search.screen.dart';
@@ -8,6 +9,7 @@ import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:alumni_hub/widgets/top.events.tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/app.drawer.dart';
 
@@ -21,54 +23,57 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(
-            'Discover',
-            style: GoogleFonts.roboto(),
-          ),
-          actions: [
-            IconButton(
-                onPressed: () => Navigator.push(context,
-                    RouteAnimate(builder: (context) => const SearchScreen())),
-                icon: const Icon(Icons.search)),
-            IconButton(
-                onPressed: () => Navigator.push(
-                    context,
-                    RouteAnimate(
-                        builder: (context) => const FavouriteScreen())),
-                icon: const Icon(Icons.favorite)),
-            Builder(builder: (context) {
-              return IconButton(
+    return Consumer<EventData>(builder: (context, eventData, _) {
+      return Scaffold(
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            title: Text(
+              'Discover',
+              style: GoogleFonts.roboto(),
+            ),
+            actions: [
+              IconButton(
+                  onPressed: () => Navigator.push(context,
+                      RouteAnimate(builder: (context) => const SearchScreen())),
+                  icon: const Icon(Icons.search)),
+              IconButton(
                   onPressed: () => Navigator.push(
                       context,
                       RouteAnimate(
-                          builder: (context) => const SettingScreen())),
-                  icon: const Icon(Icons.more_vert));
-            })
-          ],
-          backgroundColor: kPrimaryColor,
-        ),
-        drawer: AppDrawer(),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(left: 24.0, top: 24.0, bottom: 24.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                buildEvents(),
-                const SizedBox(height: 32),
-                buildTopEvents(),
-                const Spacer(),
-                buildChatBot(),
-              ],
-            ),
+                          builder: (context) => const FavouriteScreen())),
+                  icon: const Icon(Icons.favorite)),
+              Builder(builder: (context) {
+                return IconButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        RouteAnimate(
+                            builder: (context) => const SettingScreen())),
+                    icon: const Icon(Icons.more_vert));
+              })
+            ],
+            backgroundColor: kPrimaryColor,
           ),
-        ));
+          drawer: const AppDrawer(),
+          body: Center(
+            child: Padding(
+              padding:
+                  const EdgeInsets.only(left: 24.0, top: 24.0, bottom: 24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  buildEvents(eventData),
+                  const SizedBox(height: 32),
+                  buildTopEvents(),
+                  const Spacer(),
+                  buildChatBot(),
+                ],
+              ),
+            ),
+          ));
+    });
   }
 
-  Widget buildEvents() => SizedBox(
+  Widget buildEvents(EventData eventData) => SizedBox(
         height: MediaQuery.of(context).size.height * 0.26,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,12 +90,11 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 16),
               Expanded(
                   child: ListView.builder(
-                itemCount: 6,
+                itemCount: eventData.eventList.length,
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
-                  return EventTile(
-                    index: index,
-                  );
+                  var data = eventData.eventList[index];
+                  return EventTile(eventModel: data);
                 },
               ))
             ]),

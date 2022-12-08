@@ -1,5 +1,5 @@
 import 'package:alumni_hub/const.dart';
-import 'package:alumni_hub/views/login.screen.dart';
+import 'package:alumni_hub/views/auth/login.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';

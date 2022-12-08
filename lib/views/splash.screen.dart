@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:alumni_hub/const.dart';
-import 'package:alumni_hub/views/landing.screen.dart';
+import 'package:alumni_hub/views/auth/landing.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:flutter/material.dart';
 
