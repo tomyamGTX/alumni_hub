@@ -1,6 +1,5 @@
 import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/const.dart';
-import 'package:alumni_hub/models/user.model.dart';
 import 'package:alumni_hub/views/home.screen.dart';
 import 'package:alumni_hub/views/register.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
@@ -108,8 +107,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ///check contain upper case (?=.*[A-Z])
                     RegExp exp =
                         RegExp(r"(?=.*\d)(?=.*[A-Z])(?=.*\W)[a-zA-Z0-9]{6}");
-                    print(exp.hasMatch(v!));
-                    if (exp.hasMatch(v)) {
+
+                    if (exp.hasMatch(v!)) {
                       return null;
                     } else if (v.isEmpty) {
                       return 'Please Insert password';

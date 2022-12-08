@@ -36,3 +36,5 @@ var titleStyle = GoogleFonts.roboto(
 );
 
 var kPrimaryColor = const Color.fromRGBO(108, 18, 255, 0.87);
+String userIcon =
+    'https://firebasestorage.googleapis.com/v0/b/demoapp-fc6fa.appspot.com/o/user_icon.png?alt=media&token=26963614-d523-4a2a-9d1f-4273949d08a8';

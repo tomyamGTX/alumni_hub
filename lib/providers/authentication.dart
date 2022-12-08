@@ -1,4 +1,3 @@
-import 'package:alumni_hub/models/user.model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,6 @@ class Authentication extends ChangeNotifier {
   }
   factory Authentication() => Authentication._();
   User? user = FirebaseAuth.instance.currentUser;
-  UserModel? _userModel;
   login(String email, String password) async {
     //login here
     await FirebaseAuth.instance

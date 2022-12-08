@@ -9,6 +9,8 @@ import 'package:alumni_hub/widgets/top.events.tile.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../widgets/app.drawer.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -48,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
           backgroundColor: kPrimaryColor,
         ),
-        drawer: const Drawer(),
+        drawer: AppDrawer(),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.only(left: 24.0, top: 24.0, bottom: 24.0),
@@ -127,8 +129,8 @@ class _HomeScreenState extends State<HomeScreen> {
               minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 54),
               shape: StadiumBorder(
                   side: BorderSide(color: kPrimaryColor, width: 2))),
-          onPressed: () => Navigator.push(
-              context, RouteAnimate(builder: (context) => const ChatBotScreen())),
+          onPressed: () => Navigator.push(context,
+              RouteAnimate(builder: (context) => const ChatBotScreen())),
           child: Text(
             'CHAT WITH ALUMNI BOT',
             style: GoogleFonts.roboto(

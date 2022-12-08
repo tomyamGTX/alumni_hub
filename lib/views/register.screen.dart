@@ -2,6 +2,7 @@ import 'package:alumni_hub/const.dart';
 import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/views/home.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -69,7 +70,7 @@ class _RegisterState extends State<Register> {
                           name = value;
                         }),
                     validator: (value) {
-                      RegExp exp = RegExp(r"^[a-zA-Z ]*$",
+                      RegExp exp = RegExp(r"^[a-zA-Z ]+$",
                           caseSensitive: false, unicode: true, dotAll: true);
                       if (exp.hasMatch(value!)) {
                         return null;
@@ -143,19 +144,24 @@ class _RegisterState extends State<Register> {
                           fixedSize: const Size(328, 48)),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          await Provider.of<Authentication>(context,
-                                  listen: false)
-                              .register(email!, password!);
-                          if (!mounted) return;
-                          await Provider.of<Authentication>(context,
-                                  listen: false)
-                              .setName(name!);
-                          if (!mounted) return;
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              RouteAnimate(
-                                  builder: (context) => const HomeScreen()),
-                              (route) => false);
+                          try {
+                            await Provider.of<Authentication>(context,
+                                    listen: false)
+                                .register(email!, password!);
+                            if (!mounted) return;
+                            await Provider.of<Authentication>(context,
+                                    listen: false)
+                                .setName(name!);
+                            if (!mounted) return;
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                RouteAnimate(
+                                    builder: (context) => const HomeScreen()),
+                                (route) => false);
+                          } on FirebaseAuthException catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text(e.message!)));
+                          }
 
                           //try catch here
                         }
