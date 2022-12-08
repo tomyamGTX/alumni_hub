@@ -35,10 +35,10 @@ class _SearchScreenState extends State<SearchScreen> {
           resizeToAvoidBottomInset: false,
           appBar: AppBar(
             leading: IconButton(
-              icon: Icon(Icons.navigate_before),
+              icon: const Icon(Icons.navigate_before),
               onPressed: () {
-                Navigator.push(
-                    context, RouteAnimate(builder: (context) => HomeScreen()));
+                Navigator.push(context,
+                    RouteAnimate(builder: (context) => const HomeScreen()));
               },
             ),
             title: TextField(
@@ -48,7 +48,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   isSearch = true;
                 });
                 List<EventModel> data = eventData.eventList;
-                data.forEach((element) {
+                for (var element in data) {
                   if (element.eventName!
                       .toLowerCase()
                       .contains(v.toLowerCase())) {
@@ -66,7 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       filterList.clear();
                     });
                   }
-                });
+                }
               },
               style: GoogleFonts.roboto(color: Colors.white, fontSize: 20),
               decoration: InputDecoration(
@@ -92,7 +92,11 @@ class _SearchScreenState extends State<SearchScreen> {
             itemBuilder: (BuildContext context, int index) {
               var item =
                   isSearch ? filterList[index] : eventData.eventList[index];
-              return ListTile(onTap:() => Navigator.push(context, RouteAnimate(builder: (context)=>VideoScreen(eventModel: item))),
+              return ListTile(
+                onTap: () => Navigator.push(
+                    context,
+                    RouteAnimate(
+                        builder: (context) => VideoScreen(eventModel: item))),
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(item.eventPicUrl!),
                 ),
