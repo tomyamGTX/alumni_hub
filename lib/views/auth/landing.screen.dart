@@ -1,5 +1,5 @@
 import 'package:alumni_hub/providers/authentication.dart';
-import 'package:alumni_hub/views/home.screen.dart';
+import 'package:alumni_hub/views/events/home.screen.dart';
 import 'package:alumni_hub/views/onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

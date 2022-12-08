@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/events.provider.dart';
-import '../views/video.dart';
+import '../views/events/video.dart';
 
 class EventTile extends StatefulWidget {
   final EventModel eventModel;

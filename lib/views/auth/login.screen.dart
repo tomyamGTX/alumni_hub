@@ -1,6 +1,6 @@
 import 'package:alumni_hub/providers/authentication.dart';
 import 'package:alumni_hub/const.dart';
-import 'package:alumni_hub/views/home.screen.dart';
+import 'package:alumni_hub/views/events/home.screen.dart';
 import 'package:alumni_hub/views/auth/register.screen.dart';
 import 'package:alumni_hub/widgets/route.animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';

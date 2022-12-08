@@ -90,6 +90,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: GoogleFonts.roboto(
                     fontSize: 16, fontWeight: FontWeight.w400, height: 2.4),
               ),
+              trailing: const Icon(Icons.navigate_next),
             ),
             ListTile(
               title: Text(
@@ -97,6 +98,7 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: GoogleFonts.roboto(
                     fontSize: 16, fontWeight: FontWeight.w400, height: 2.4),
               ),
+              trailing: const Icon(Icons.navigate_next),
             )
           ],
         ),
