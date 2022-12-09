@@ -15,7 +15,7 @@ class ConversationModel {
   ///get data from db and convert to object
   ConversationModel.fromJson(Map<String, dynamic> map) {
     Timestamp time = map['conversationDate'];
-    DateTime.fromMicrosecondsSinceEpoch(time.microsecondsSinceEpoch);
+
     conversationId = map['conversationId'];
     conversationDate = time.toDate();
     userId = map['userId'];

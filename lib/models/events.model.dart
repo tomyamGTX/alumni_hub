@@ -10,7 +10,7 @@ class EventModel {
   String? userId;
   EventModel.fromJson(Map<String, dynamic> map) {
     Timestamp time = map['eventDate'];
-    DateTime.fromMicrosecondsSinceEpoch(time.microsecondsSinceEpoch);
+
     eventId = map['eventId'];
     eventName = map['eventName'];
     eventDate = time.toDate();
